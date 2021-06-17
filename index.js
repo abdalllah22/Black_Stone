@@ -3,10 +3,26 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 const winston = require("winston");
 
+require('dotenv/config');
+
+// routes
+const users = require('./routes/users');
+const cars = require('./routes/cars');
+const error = require('./middleware/error');
+
+
 const app = express();
 const port = 3000;
 
-require('dotenv/config');
+app.use(cors());
+
+// middleware
+app.use(express.json());
+app.use(error);
+
+app.use("/api/users", users);
+app.use("/api/cars", cars);
+
 
 //* Handel uncaught exceptions
 winston.exceptions.handle(
