@@ -1,5 +1,7 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
+require("./user");
+require("./card")
 
 
 const carSchema = mongoose.Schema({
@@ -22,13 +24,9 @@ const carSchema = mongoose.Schema({
         maxlength: 5,
     },
     card: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Card",
         required: true,
-        default: 10,
-    },
-    passAt:{ 
-        type: Date,
-        default: Date.now(),
     },
     employee: {
         type: mongoose.Schema.Types.ObjectId,
@@ -44,22 +42,13 @@ const Car = mongoose.model("Car", carSchema);
 
 function validateCar(car) {
     const schema = Joi.object({
-        name: Joi.string().min(3).max(50).required(),
+        brand: Joi.string().min(3).max(50).required(),
         position: Joi.string().min(3).max(50).required(),
-        age: Joi.number().min(20).max(60).required(),
+        plateNo: Joi.string().min(4).max(5).required(),
     });
     return schema.validate(car);
 }
 
-function validateEditCar(car) {
-    const schema = Joi.object({
-        name: Joi.string().min(3).max(50).required(),
-        position: Joi.string().min(3).max(50).required(),
-        age: Joi.number().min(20).max(60).required(),
-    });
-    return schema.validate(car);
-}
 
 module.exports.Car = Car;
 module.exports.validate = validateCar;
-module.exports.editValidate = validateEditCar;

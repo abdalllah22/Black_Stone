@@ -37,15 +37,6 @@ function validateUser(user) {
     return schema.validate(user);
 }
 
-function validateEditUser(user) {
-    const schema = Joi.object({
-        name: Joi.string().min(3).max(50).required(),
-        position: Joi.string().min(3).max(50).required(),
-        age: Joi.number().min(20).max(60).required(),
-    });
-    return schema.validate(user);
-}
 
 module.exports.User = User;
 module.exports.validate = validateUser;
-module.exports.editValidate = validateEditUser;
