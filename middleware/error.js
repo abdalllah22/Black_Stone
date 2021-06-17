@@ -2,7 +2,7 @@ const winston = require('winston');
 
 
 function error(err, req, res, next) {
-    return res.status(500).json({
+    res.status(500).json({
         status: "Something failed at the server.",
         message: err,
     })
