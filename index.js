@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require("cors");
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const winston = require("winston");
 
@@ -18,6 +19,7 @@ app.use(cors());
 
 // middleware
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(error);
 
 app.use("/api/users", users);

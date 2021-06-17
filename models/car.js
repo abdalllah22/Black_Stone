@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
-require("./user");
-require("./card")
+//require("./user");
+//require("./card")
 
 
 const carSchema = mongoose.Schema({
@@ -20,13 +20,13 @@ const carSchema = mongoose.Schema({
     plateNo: {
         type: String,
         required: true,
+        unique: true,
         minlength: 4,
         maxlength: 5,
     },
     card: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Card",
-        required: true,
     },
     employee: {
         type: mongoose.Schema.Types.ObjectId,

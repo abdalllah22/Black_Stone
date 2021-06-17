@@ -13,7 +13,6 @@ router.get('/',async (req,res)=>{
         })
     }
     res.send(userlist);
-    console.log(userlist)
 })
 
 router.get('/:id', async (req,res)=>{
