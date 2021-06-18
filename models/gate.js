@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 
 
 const gateSchema = mongoose.Schema({
-    car: {
+    card: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car',
+        ref: 'Card',
         required:true
     },
     totalPrice: {
