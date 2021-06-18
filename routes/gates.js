@@ -1,4 +1,5 @@
 const { Gate } = require('../models/gate');
+const { Car } = require('../models/car')
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -23,13 +24,21 @@ router.get('/:id', async (req, res) =>{
     res.send(passgate);
 })
 
+
+// Develop an API that simulates passing through the highway gate (by car ID) and returns remaining balance in the card.
 router.post('/', async (req,res)=>{
-    
     let passgate = new Gate({
         car: req.body.car,
         dateOfPass: Date.now(),
-        
     })
+   
+    let x = await Car.findById(passgate.car._id);
+    await Car.findByIdAndUpdate(
+        passgate.car._id,
+        {
+            card : x.card - x.priceOfPass
+        }
+    );
     
     passgate = await passgate.save();
     if (!passgate) {
