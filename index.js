@@ -9,6 +9,7 @@ require('dotenv/config');
 // routes
 const users = require('./routes/users');
 const cars = require('./routes/cars');
+const gates = require('./routes/gates')
 const error = require('./middleware/error');
 
 
@@ -24,6 +25,7 @@ app.use(error);
 
 app.use("/api/users", users);
 app.use("/api/cars", cars);
+app.use("/api/gates", gates);
 
 
 //* Handel uncaught exceptions
@@ -57,7 +59,7 @@ mongoose.connect(process.env.CONNECTION_STRING, {
 
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`app listening at http://localhost:${port}`)
     console.log(`Server listening on port ${port}`)
 });
 

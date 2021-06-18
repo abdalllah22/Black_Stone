@@ -3,17 +3,10 @@ const mongoose = require("mongoose");
 
 
 const gateSchema = mongoose.Schema({
-    card: {
+    car: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Card',
+        ref: 'Car',
         required:true
-    },
-    totalPrice: {
-        type: Number,
-    },
-    employee: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
     },
     dateOfPass: {
         type: Date,

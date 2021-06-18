@@ -1,12 +1,11 @@
 const { Car } = require('../models/car');
-const { Card } = require('../models/card');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const _ = require("lodash");
 
 router.get('/',async (req,res)=>{
-    const carlist = await Car.find().populate('employee');  
+    const carlist = await Car.find().populate('employee','name');  
     if(!carlist){
         res.status(500).json({
             success: false
@@ -20,7 +19,7 @@ router.get('/:id', async (req,res)=>{
         res.status(400).send('Invaild ID')
     }
 
-    const car = await Car.findById(req.params.id).populate('employee')
+    const car = await Car.findById(req.params.id).populate('employee','name')
     if(!car){
         res.status(500).json({
             success: false,
@@ -35,8 +34,9 @@ router.post('/', async (req,res)=>{
         brand: req.body.brand,
         model: req.body.model,
         plateNo: req.body.plateNo,
+        priceOfPass: 4,
         employee: req.body.employee,
-        card: req.body.card,
+        card: req.body.card
     })
     
     car = await car.save();
@@ -53,7 +53,7 @@ router.patch('/:id', async (req,res)=>{
     
     const car = await Car.findByIdAndUpdate(
         req.params.id,
-        _.pick(req.body, ["brand", "model", "plateNo","employee"]),      
+        _.pick(req.body, ["brand", "model", "plateNo","card"]),      
         {new: true}
     );
 

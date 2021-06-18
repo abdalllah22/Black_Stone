@@ -27,6 +27,16 @@ const carSchema = mongoose.Schema({
         required: true,
         default:4
     },
+    employee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        unique: true
+    },
+    card:{
+        type: Number,
+        required: true,
+        default:10
+    }
 });
 
 
