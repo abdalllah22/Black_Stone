@@ -1,7 +1,5 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
-//require("./user");
-//require("./card")
 
 
 const carSchema = mongoose.Schema({
@@ -24,18 +22,11 @@ const carSchema = mongoose.Schema({
         minlength: 4,
         maxlength: 5,
     },
-    card: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Card",
-    },
-    employee: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+    priceOfPass : {
+        type: Number,
         required: true,
-        unique: true,
+        default:4
     },
-
-
 });
 
 

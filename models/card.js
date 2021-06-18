@@ -3,15 +3,14 @@ const mongoose = require("mongoose");
 
 
 const cardSchema = mongoose.Schema({
-    total: {
+    noOfPasses: {
         type: Number,
         required: true,
-        default: 10,
     },
-    passAt:{ 
-        type: Date,
-        default: Date.now(),
-    },
+    car:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Car'
+    }
 });
 
 
