@@ -75,6 +75,26 @@ router.post('/', async (req,res)=>{
     return res.status(201).send({ message: 'car pass gate', data: passgate });    
 });
 
+router.delete('/:id',  async (req,res)=>{
+    if(!mongoose.isValidObjectId(req.params.id)){
+        res.status(400).send({ message:'Invaild ID'})
+    }
+
+    const car = await Gate.findByIdAndRemove(req.params.id)
+    if(!passgate){
+        res.status(500).json({
+            success: false,
+            message: 'the passgate with given ID was not found'
+        })
+    } else {
+        return res.status(200).json({
+            success: true,
+            message: 'pass from gate is deleted'
+        });
+    }
+    
+})
+
 
 
 module.exports = router;
